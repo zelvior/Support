@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support My Education | Student Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        :root {
+            --bg: #03030a;
+            --surface: #080813;
+            --surface-2: #0d0d1f;
+            --border: rgba(255,255,255,0.06);
+            --indigo: #6366f1;
+            --indigo-light: #818cf8;
+            --emerald: #10b981;
+            --rose: #f43f5e;
+            --text-dim: #8888aa;
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            background-color: var(--bg);
+            color: #fff;
+            font-family: 'DM Sans', sans-serif;
+            overflow-x: hidden;
+            margin: 0;
+        }
+
+        h1, h2, h3, .syne { font-family: 'Syne', sans-serif; }
+
+        .glass-panel {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            backdrop-filter: blur(12px);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #fff 30%, var(--indigo-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .universal-ad-wrapper {
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 90px;
+            margin: 15px 0;
+        }
+        .universal-ad-scaler {
+            transform-origin: top center;
+        }
+
+        @media screen and (max-width: 768px) {
+            .universal-ad-scaler {
+                transform: scale(calc(100vw / 760)); 
+            }
+            .universal-ad-wrapper {
+                height: calc(90px * (100vw / 760));
+                min-height: auto;
+            }
+        }
+
+        .status-pill {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            padding: 6px 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        #loading-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background: var(--bg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.8s ease, visibility 0.8s;
+        }
+
+        .loader-ring {
+            width: 60px;
+            height: 60px;
+            border: 3px solid rgba(99,102,241,0.1);
+            border-top: 3px solid var(--indigo);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .shimmer {
+            position: relative;
+            overflow: hidden;
+        }
+        .shimmer::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+            transform: translateX(-100%);
+            animation: shimmer-anim 2s infinite;
+        }
+        @keyframes shimmer-anim { 100% { transform: translateX(100%); } }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div id="loading-overlay">
+        <div class="loader-ring mb-6"></div>
+        <p class="text-dim text-sm tracking-widest uppercase font-semibold syne">Synchronizing Ad Servers</p>
+    </div>
+
+    <main class="min-h-screen relative px-4 py-12 md:py-20 flex flex-col items-center">
+        <div class="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] bg-indigo-900/20 blur-[120px] rounded-full -z-10"></div>
+        <div class="fixed bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-900/10 blur-[120px] rounded-full -z-10"></div>
+
+        <div class="max-w-3xl w-full text-center mb-12">
+            <div class="status-pill mb-6 mx-auto">
+                <span id="status-dot" class="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse"></span>
+                <span id="status-text" class="text-dim">Verifying Connection...</span>
+            </div>
+            
+            <h1 class="text-4xl md:text-6xl font-extrabold syne mb-6 gradient-text tracking-tight">
+                Support My Dev Journey
+            </h1>
+            <div class="text-text-dim text-lg space-y-4 max-w-2xl mx-auto">
+                <p>Seriously, thank you for keeping your Ad Blocker off. This helps me cover my school fees and keeps me motivated to build better tools for you.</p>
+            </div>
+        </div>
+
+        <div id="blocker-on" class="hidden max-w-xl w-full glass-panel p-8 text-center border-rose-500/20">
+            <div class="w-16 h-16 bg-rose-500/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                <svg class="w-8 h-8 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                </svg>
+            </div>
+            <h2 class="text-2xl font-bold syne mb-4 text-rose-400">Ad Blocker Detected</h2>
+            <p class="text-text-dim mb-8">This page only works with active advertisements. Please disable your blocker to support my education.</p>
+            <button onclick="window.location.reload()" class="w-full py-4 rounded-xl font-bold bg-white text-black hover:bg-zinc-200 transition-all">Refresh Page</button>
+        </div>
+
+        <div id="blocker-off" class="hidden w-full max-w-4xl space-y-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="glass-panel p-6 md:p-10 text-center relative overflow-hidden shimmer">
+                    <div class="relative z-10">
+                        <div id="countdown-display" class="text-5xl font-bold syne mb-2 text-white">00:30</div>
+                        <p class="text-text-dim uppercase tracking-[0.2em] text-[10px] font-bold mb-6">Support Session Active</p>
+                        <div class="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
+                            <div id="session-progress" class="h-full bg-indigo-500 w-0 transition-all duration-1000"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-6 md:p-10 text-center relative overflow-hidden">
+                    <div class="relative z-10">
+                        <div id="visit-count" class="text-5xl font-bold syne mb-2 text-white">0/10</div>
+                        <p class="text-text-dim uppercase tracking-[0.2em] text-[10px] font-bold mb-6">24h Daily Support Limit</p>
+                        <div class="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
+                            <div id="visit-progress" class="h-full bg-emerald-500 w-0 transition-all duration-500"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <p class="bg-white/5 p-4 rounded-xl border border-white/10 text-white font-medium italic text-center">
+                "Your time here directly funds my education."
+            </p>
+            <p class="text-sm text-center text-text-dim italic">If you want to support me more, hang out for 30 seconds or click any ad below. Bless you, bro! 🙂🙏</p>
+
+            <div class="space-y-6">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="h-px flex-1 bg-white/5"></div>
+                    <span class="text-[10px] font-bold text-text-muted tracking-[0.3em] uppercase">Advertising Support Stream</span>
+                    <div class="h-px flex-1 bg-white/5"></div>
+                </div>
+
+                <div id="ad-slots-anchor" class="grid grid-cols-1 gap-4">
+                    <script>
+                        const getVisits = () => {
+                            const raw = localStorage.getItem('zelvior_v3_visits');
+                            if (!raw) return [];
+                            const now = Date.now();
+                            return JSON.parse(raw).filter(t => (now - t) < 86400000);
+                        };
+                        
+                        const currentVisitsData = getVisits();
+                        if (currentVisitsData.length < 10) {
+                            for(let i=0; i<10; i++) {
+                                document.write(`
+                                <div class="universal-ad-wrapper">
+                                    <div class="universal-ad-scaler">
+                                        <script type="text/javascript">
+                                            atOptions = { 'key' : '69f4020e8c77aaf6c40ada31bf1119b5', 'format' : 'iframe', 'height' : 90, 'width' : 728, 'params' : {} };
+                                        <\/script>
+                                        <script src="https://www.highperformanceformat.com/69f4020e8c77aaf6c40ada31bf1119b5/invoke.js"><\/script>
+                                    </div>
+                                </div>
+                                `);
+                            }
+                        } else {
+                            document.write(`
+                                <div class="glass-panel p-12 text-center border-amber-500/20">
+                                    <div class="text-amber-500 text-4xl mb-4">✨</div>
+                                    <h3 class="syne text-xl font-bold mb-2">Maximum Support Reached!</h3>
+                                    <p class="text-text-dim text-sm max-w-sm mx-auto">
+                                        You've reached your 10-session limit for the last 24 hours. 
+                                        Thank you for your incredible support! Please come back tomorrow.
+                                    </p>
+                                </div>
+                            `);
+                        }
+                    </script>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="ad-bait" class="ads ad-banner ad-container" style="position:absolute;left:-9999px;width:1px;height:1px;">&nbsp;</div>
+
+    <script>
+    let timeLeft = 30;
+    const LIMIT = 10;
+
+    function updateVisitUI() {
+        const raw = localStorage.getItem('zelvior_v3_visits');
+        const visits = raw ? JSON.parse(raw).filter(t => (Date.now() - t) < 86400000) : [];
+        document.getElementById('visit-count').textContent = `${visits.length}/${LIMIT}`;
+        document.getElementById('visit-progress').style.width = `${(visits.length / LIMIT) * 100}%`;
+        return visits.length;
+    }
+
+    function recordVisit() {
+        const raw = localStorage.getItem('zelvior_v3_visits');
+        let visits = raw ? JSON.parse(raw).filter(t => (Date.now() - t) < 86400000) : [];
+        if (visits.length < LIMIT) {
+            visits.push(Date.now());
+            localStorage.setItem('zelvior_v3_visits', JSON.stringify(visits));
+            updateVisitUI();
+        }
+    }
+
+    async function checkAdBlock() {
+        const currentCount = updateVisitUI();
+        const limitReached = currentCount >= LIMIT;
+
+        if (!limitReached) await new Promise(r => setTimeout(r, 1000));
+
+        const bait = document.getElementById('ad-bait');
+        const baitBlocked = !bait || window.getComputedStyle(bait).display === 'none' || bait.offsetHeight === 0;
+        const iframeDetected = !!document.querySelector('iframe');
+        const isBlocked = baitBlocked || (!limitReached && !iframeDetected);
+
+        const dot = document.getElementById('status-dot');
+        const text = document.getElementById('status-text');
+
+        if (isBlocked && !limitReached) {
+            document.getElementById('blocker-on').style.display = 'block';
+            dot.style.background = '#f43f5e';
+            text.textContent = 'Ad Blocker Detected';
+        } else {
+            document.getElementById('blocker-off').style.display = 'block';
+            dot.style.background = '#10b981';
+            text.textContent = limitReached ? 'Limit Reached — Support Completed' : 'Connection Active — Support Logged';
+            
+            if (!limitReached) {
+                recordVisit();
+                startTimer();
+            } else {
+                document.getElementById('countdown-display').textContent = "DONE";
+                document.getElementById('session-progress').style.width = "100%";
+            }
+        }
+
+        document.getElementById('loading-overlay').style.opacity = '0';
+        setTimeout(() => document.getElementById('loading-overlay').style.visibility = 'hidden', 800);
+    }
+
+    function startTimer() {
+        const display = document.getElementById('countdown-display');
+        const progress = document.getElementById('session-progress');
+        const itv = setInterval(() => {
+            if (timeLeft <= 0) {
+                clearInterval(itv);
+                display.textContent = "DONE";
+                display.classList.add('text-emerald-400');
+                return;
+            }
+            timeLeft--;
+            display.textContent = `00:${timeLeft.toString().padStart(2, '0')}`;
+            progress.style.width = `${((30 - timeLeft) / 30) * 100}%`;
+        }, 1000);
+    }
+
+    window.onload = checkAdBlock;
+    </script>
+</body>
+</html>
